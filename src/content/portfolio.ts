@@ -44,7 +44,7 @@ export const caseStudies: CaseStudy[] = [
     heroAlt:
       "Front yard of a brick Virginia colonial in Wyndham after a full reset — fresh stripes, edged beds, deep brown mulch.",
     beforeAfter: {
-      before: "/images/ba-wyndham-before.jpg",
+      before: "/images/ba-wyndham-before-new.png",
       after: "/images/ba-wyndham-after.jpg",
       caption: "Wyndham · Spring Cleanup + Mulch Refresh · 1 day",
     },

@@ -30,7 +30,7 @@ export function TheCut() {
 
         <Reveal delay={0.16}>
           <BeforeAfterSlider
-            beforeSrc="/images/ba-wyndham-before.jpg"
+            beforeSrc="/images/ba-wyndham-before-new.png"
             afterSrc="/images/ba-wyndham-after.jpg"
             beforeAlt="Wyndham property before — overgrown, ragged edges, faded mulch."
             afterAlt="Wyndham property after — crisp stripes, fresh mulch, clean edges."
