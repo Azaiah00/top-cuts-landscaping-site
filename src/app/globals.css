@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Top Cut Landscaping — global styles
+   - Brand color tokens defined as CSS variables in :root.
+   - Tailwind utilities reference them via tailwind.config.ts.
+   ==========================================================================*/
+
+@layer base {
+  :root {
+    /* Core brand palette (do not change without coordinating with brand book) */
+    --tc-deep-navy: #0E2742;     /* primary  — logo ring, headers */
+    --tc-fresh-cut: #6BBE3C;     /* primary green — CTAs, accents */
+    --tc-deep-forest: #1F4D2A;   /* secondary green — depth, hover */
+    --tc-warm-cream: #F5F0E6;    /* page background, cards */
+    --tc-fog: #E8E4DA;           /* dividers, subtle fills */
+    --tc-stone: #8A8475;         /* body subtext, captions */
+    --tc-soil: #3A2A1F;          /* serif display text accent */
+    --tc-pure-white: #FFFFFF;
+    --tc-charcoal: #14161A;      /* near-black for body copy */
+
+    /* Semantic aliases used by base layer */
+    --background: var(--tc-warm-cream);
+    --foreground: var(--tc-charcoal);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Hide horizontal overflow caused by Ken Burns / hero scaling */
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+    /* Better default text rendering on display fonts */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Default heading styling — every page gets editorial Fraunces */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-tc-deep-navy tracking-tight;
+  }
+
+  /* Visible, brand-colored focus ring everywhere keyboard users land */
+  :focus-visible {
+    outline: 2px solid var(--tc-fresh-cut);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Selection color — small touch, big polish */
+  ::selection {
+    background: var(--tc-fresh-cut);
+    color: var(--tc-deep-navy);
+  }
+}
+
+@layer components {
+  /* Small uppercase mono label used above section titles ("eyebrow") */
+  .eyebrow {
+    @apply font-mono text-[11px] tracking-[0.18em] uppercase text-tc-fresh-cut;
+  }
+
+  /* Editorial drop cap for case-study + journal intro paragraphs */
+  .drop-cap::first-letter {
+    @apply font-display text-tc-deep-navy;
+    float: left;
+    font-size: 4.5rem;
+    line-height: 0.85;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    font-weight: 600;
+  }
+
+  /* Subtle film-grain overlay we can drop on hero / image hover states */
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+    background-size: 160px 160px;
+  }
+
+  /* Hairline divider in cream/fog tone — used between editorial sections */
+  .hairline {
+    @apply h-px w-full bg-tc-fog;
+  }
+}
+
+@layer utilities {
+  /* Skip-to-content helper — visually hidden until focused */
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    @apply not-sr-only fixed top-4 left-4 z-[100] bg-tc-deep-navy text-tc-warm-cream px-4 py-2 rounded;
+  }
+
+  /* Constrained editorial column for long-form copy */
+  .prose-column {
+    @apply max-w-[68ch];
+  }
+
+  /* Ken Burns slow zoom for hero backgrounds. Respects reduced-motion. */
+  .ken-burns {
+    animation: kenBurns 18s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ken-burns { animation: none; }
+  }
+}
+
+/* Slow zoom — kept outside @layer so it always emits */
+@keyframes kenBurns {
+  0%   { transform: scale(1.0); }
+  100% { transform: scale(1.05); }
+}
