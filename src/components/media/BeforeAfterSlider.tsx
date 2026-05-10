@@ -83,7 +83,10 @@ export function BeforeAfterSlider({
           document.body.style.userSelect = "none";
           updateFromX(e.clientX);
         }}
-        className="relative w-full overflow-hidden rounded-sm bg-tc-fog cursor-ew-resize select-none touch-none focus:outline-none focus-visible:ring-2 focus-visible:ring-tc-fresh-cut"
+        // touch-action: pan-y lets the page scroll vertically when the user's
+        // finger drifts onto the slider mid-scroll. Horizontal pan is consumed
+        // by us for the drag handle. (Was "touch-none", which blocked scroll.)
+        className="relative w-full overflow-hidden rounded-sm bg-tc-fog cursor-ew-resize select-none [touch-action:pan-y] focus:outline-none focus-visible:ring-2 focus-visible:ring-tc-fresh-cut"
         style={{ aspectRatio }}
       >
         {/* AFTER — sits as base layer */}

@@ -38,7 +38,9 @@ export function HomeHero() {
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 0.2 }}
-          className="font-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-tc-fresh-cut"
+          // Tighter tracking + smaller size on mobile so the line never
+          // overflows narrow phone viewports (was causing horizontal scroll).
+          className="block max-w-full font-mono text-[10px] tracking-[0.14em] sm:text-[11px] sm:tracking-[0.2em] md:text-xs uppercase text-tc-fresh-cut"
         >
           Henrico · Short Pump · West End · Since 2008
         </motion.span>

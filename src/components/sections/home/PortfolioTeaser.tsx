@@ -37,8 +37,12 @@ export function PortfolioTeaser() {
         </div>
       </div>
 
-      {/* Edge-to-edge horizontal scroll on small screens, contained on large */}
-      <div className="overflow-x-auto pb-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+      {/* Edge-to-edge horizontal scroll on small screens, contained on large.
+          touch-action: pan-x lets vertical swipes pass straight through to the
+          page, so this carousel can never hijack the user's downward scroll.
+          overscroll-behavior-x: contain stops carousel-end bounces from
+          bubbling out and shifting the whole page sideways. */}
+      <div className="overflow-x-auto overflow-y-hidden pb-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [touch-action:pan-x] [overscroll-behavior-x:contain]">
         <ul className="flex gap-5 pl-6 md:pl-8 lg:pl-[calc((100vw-1280px)/2+2rem)] pr-6 md:pr-8 snap-x snap-mandatory">
           {featured.map((project) => (
             <li

@@ -5,8 +5,18 @@
 
 import type { Metadata } from "next";
 
+// Resolve the canonical site URL in this priority order:
+//   1. NEXT_PUBLIC_SITE_URL — explicit override (set this when the real
+//      topcutlandscaping.com domain is live).
+//   2. URL — Netlify automatically injects the deploy's primary URL at build
+//      time (e.g. https://topcutlandscaping-mocksite.netlify.app). This means
+//      the OG / canonical tags always match wherever the site is actually
+//      hosted, so iMessage / Slack / Twitter previews show the right link.
+//   3. Hardcoded fallback for local dev.
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://topcutlandscaping.com";
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  process.env.URL ??
+  "http://localhost:3000";
 
 export const SITE_NAME = "Top Cut Landscaping";
 export const SITE_TAGLINE = "The yard your neighbors notice.";
