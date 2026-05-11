@@ -1,14 +1,17 @@
 # Netlify config for Top Cut Landscaping.
-# The official @netlify/plugin-nextjs runtime is auto-installed by Netlify
-# when it detects a Next.js project, so we only set the build command
-# and Node version explicitly. No publish dir needed for App Router —
-# the runtime handles routing, ISR, and image optimization.
+# Next.js App Router: build is standard `next build`. The framework plugin is
+# pinned in package.json and declared here so Netlify never depends on a flaky
+# “auto extension” fetch for the Next runtime alone.
 
 [build]
   command = "npm run build"
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Must match devDependency @netlify/plugin-nextjs (see package.json).
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 # Sensible defaults — keep static asset caching aggressive
 # and HTML pages re-validating on each request.
